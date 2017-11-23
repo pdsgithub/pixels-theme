@@ -1,15 +1,13 @@
 <?php
 /*
-
-@package pixelstheme
--- Gallery Post Format
+@package pixelstheme  -- Gallery Post Format
 */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'pixels-format-gallery' ); ?>>
 	<header class="entry-header text-center">
 
-		<?php if( pixels_get_attachment() ):		?>
+		<?php if( pixels_get_attachment() ):	?>
 
 			<div id="post-gallery-<?php the_ID(); ?>" class="carousel slide pixels-carousel-thumb" data-ride="carousel">
 
@@ -56,13 +54,10 @@
 								<span class="pixels-icon pixels-chevron-right" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
 							</div><!-- .preview-container -->
-
 						</div><!-- .table-cell -->
 					</div><!-- .table -->
 				</a>
-
 			</div><!-- .carousel -->
-
 		<?php endif; ?>
 
 		<?php the_title( '<h1 class="entry-title"><a href="'. esc_url( get_permalink() ) .'" rel="bookmark">', '</a></h1>'); ?>
@@ -70,19 +65,15 @@
 		<div class="entry-meta">
 			<?php echo pixels_posted_meta(); ?>
 		</div>
-
 	</header>
 
 	<div class="entry-content">
-
 		<div class="entry-excerpt">
 			<?php the_excerpt(); ?>
 		</div>
-
 		<div class="button-container text-center">
 			<a href="<?php the_permalink(); ?>" class="btn btn-pixels"><?php _e( 'Read More' ); ?></a>
 		</div>
-
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
