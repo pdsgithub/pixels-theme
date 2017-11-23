@@ -16,21 +16,18 @@
 				<div class="carousel-inner" role="listbox">
 
 					<?php
-
+					
            $attachments= pixels_get_bs_slides(pixels_get_attachment(7));
           foreach($attachments as $attachment):
             ?>
 
-
-							<div class="item<?php echo $attachment['class']; ?> background-image standard-featured" style="background-image: url( <?php echo $attachment['url']; ?> );">
-
-								<div class="hide next-image-preview" data-image="<?php echo $attachment['next_img']; ?>"></div>
-								<div class="hide prev-image-preview" data-image="<?php echo $attachment['prev_img']; ?>"></div>
+			<div class="item<?php echo $attachment['class']; ?> background-image standard-featured" style="background-image: url( <?php echo $attachment['url']; ?> );">
+			 <div class="hide next-image-preview" data-image="<?php echo $attachment['next_img']; ?>"></div>
+			    <div class="hide prev-image-preview" data-image="<?php echo $attachment['prev_img']; ?>"></div>
 
                 <div class="entry-excerpt Image-caption">
                   <p><?php echo $attachment['caption']; ?></p>
                 </div>
-
 							</div>
 
 					<?php endforeach; ?>
