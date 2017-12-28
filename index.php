@@ -1,6 +1,6 @@
 <?php /*
 
-@package pixelstheme working dude y
+@package pixelstheme
 */
 get_header(); ?>
 
