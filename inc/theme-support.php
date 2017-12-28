@@ -2,31 +2,34 @@
 
 /*
 
-@package pixels theme
-============================
-         theme support PAGE
-============================
+@package pixelstheme
+
+	========================
+		THEME SUPPORT OPTIONS
+	========================
 */
+
 $options = get_option( 'post_formats' );
 $formats = array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' );
 $output = array();
 foreach ( $formats as $format ){
-$output[] = ( @$options[$format] == 1 ? $format : '' );
+	$output[] = ( @$options[$format] == 1 ? $format : '' );
 }
 if( !empty( $options ) ){
-add_theme_support( 'post-formats', $output );
+	add_theme_support( 'post-formats', $output );
 }
 
 $header = get_option( 'custom_header' );
 if( @$header == 1 ){
 	add_theme_support( 'custom-header' );
 }
+
 $background = get_option( 'custom_background' );
 if( @$background == 1 ){
 	add_theme_support( 'custom-background' );
 }
 
-add_theme_support('post-thumbnails');
+add_theme_support( 'post-thumbnails' );
 
 /* Activate Nav Menu Option */
 function pixels_register_nav_menu() {
@@ -36,9 +39,9 @@ add_action( 'after_setup_theme', 'pixels_register_nav_menu' );
 
 
 /*
-=================================
-   BLOG LOOP CUSTOM FUNCTION
-=================================
+	========================
+		BLOG LOOP CUSTOM FUNCTIONS
+	========================
 */
 
 function pixels_posted_meta(){
@@ -58,10 +61,10 @@ function pixels_posted_meta(){
 	endif;
 
 	return '<span class="posted-on">Posted <a href="'. esc_url( get_permalink() ) .'">' . $posted_on . '</a> ago</span> / <span class="posted-in">' . $output . '</span>';
-
 }
 
 function pixels_posted_footer(){
+
 	$comments_num = get_comments_number();
 	if( comments_open() ){
 		if( $comments_num == 0 ){
@@ -79,70 +82,41 @@ function pixels_posted_footer(){
 	return '<div class="post-footer-container"><div class="row"><div class="col-xs-12 col-sm-6">'. get_the_tag_list('<div class="tags-list"><span class="pixels-icon pixels-tag"></span>', ' ', '</div>') .'</div><div class="col-xs-12 col-sm-6 text-right">'. $comments .'</div></div></div>';
 }
 
-function pixels_get_attachment($num=1){
+function pixels_get_attachment( $num = 1 ){
 
-	$output='';
-  if( has_post_thumbnail() && $num==1 ):
-          $output= wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
-        else:
-					$attachments = get_posts(array(
-						'post_type' => 'attachment',
-						'posts_per_page' => $num,
-						'post_parent' => get_the_ID()
-					));
-					if( $attachments && $num==1):
-						foreach($attachments as $attachment):
-							$output = wp_get_attachment_url($attachment->ID);
-						endforeach;
-						elseif($attachments && $num > 1):
-							$output= $attachments;
-					endif;
-          wp_reset_postdata();
-        endif;
-return $output;
-}
+	$output = '';
+	if( has_post_thumbnail() && $num == 1 ):
+		$output = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );
+	else:
+		$attachments = get_posts( array(
+			'post_type' => 'attachment',
+			'posts_per_page' => $num,
+			'post_parent' => get_the_ID()
+		) );
+		if( $attachments && $num == 1 ):
+			foreach ( $attachments as $attachment ):
+				$output = wp_get_attachment_url( $attachment->ID );
+			endforeach;
+		elseif( $attachments && $num > 1 ):
+			$output = $attachments;
+		endif;
 
-function pixels_get_embedded_media($type= array()){
-	$content= do_shortcode(apply_filters('the_content', get_the_content()));
-	$embed= get_media_embedded_in_content($content, $type);
+		wp_reset_postdata();
 
-	if(in_array('audio', $type)):
-	$output= str_replace('?visual=true','?visual=false', $embed[0]);
-else:
-	$output= $embed[0];
-endif;
+	endif;
+
 	return $output;
 }
 
-function pixels_get_bs_slides($attachments){
-	$output=array();
-	$count = count($attachments)-1;
+function pixels_get_embedded_media( $type = array() ){
+	$content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
+	$embed = get_media_embedded_in_content( $content, $type );
 
-	for( $i = 0; $i <= $count; $i++ ):
-		$active = ( $i == 0 ? ' active' : '' );
+	if( in_array( 'audio' , $type) ):
+		$output = str_replace( '?visual=true', '?visual=false', $embed[0] );
+	else:
+		$output = $embed[0];
+	endif;
 
-		$n = ( $i == $count ? 0 : $i+1 );
-		$nextImg = wp_get_attachment_thumb_url( $attachments[$n]->ID );
-		$p = ( $i == 0 ? $count : $i-1 );
-		$prevImg = wp_get_attachment_thumb_url( $attachments[$p]->ID );
-
-		$output[$i]= array(
-			'class'	=> $active,
-      'url'		=> wp_get_attachment_url( $attachments[$i]->ID ),
-			'next_img' => $nextImg,
-			'prev_img' => $prevImg,
-			'caption'  => $attachments[$i]->post_excerpt
-		 );
-
-  endfor;
-
-  return $output;
-
-}
-
-function pixels_grab_url() {
-	if( ! preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/i', get_the_content(), $links ) ){
-		return false;
-	}
-	return esc_url_raw( $links[1] );
+	return $output;
 }
