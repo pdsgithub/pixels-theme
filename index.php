@@ -31,4 +31,3 @@ get_header(); ?>
 
 <?php get_footer(); ?>
 
-<!-- you cant c me -->
