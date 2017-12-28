@@ -108,6 +108,38 @@ function pixels_get_attachment( $num = 1 ){
 	return $output;
 }
 
+
+function pixels_get_bs_slides( $attachments ){
+
+	$output = array();
+	$count = count($attachments)-1;
+
+	for( $i = 0; $i <= $count; $i++ ):
+
+		$active = ( $i == 0 ? ' active' : '' );
+
+		$n = ( $i == $count ? 0 : $i+1 );
+		$nextImg = wp_get_attachment_thumb_url( $attachments[$n]->ID );
+		$p = ( $i == 0 ? $count : $i-1 );
+		$prevImg = wp_get_attachment_thumb_url( $attachments[$p]->ID );
+
+		$output[$i] = array(
+			'class'		=> $active,
+			'url'		=> wp_get_attachment_url( $attachments[$i]->ID ),
+			'next_img'	=> $nextImg,
+			'prev_img'	=> $prevImg,
+			'caption'	=> $attachments[$i]->post_excerpt
+		);
+
+	endfor;
+
+	return $output;
+
+}
+
+
+
+
 function pixels_get_embedded_media( $type = array() ){
 	$content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
 	$embed = get_media_embedded_in_content( $content, $type );
@@ -119,4 +151,11 @@ function pixels_get_embedded_media( $type = array() ){
 	endif;
 
 	return $output;
+}
+
+function pixels_grab_url() {
+	if( ! preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/i', get_the_content(), $links ) ){
+		return false;
+	}
+	return esc_url_raw( $links[1] );
 }
