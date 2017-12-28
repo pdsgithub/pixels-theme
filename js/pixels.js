@@ -48,3 +48,30 @@ jQuery(document).ready(function($) {
 	}
 
 });
+
+  /* Ajax Functions */
+  $(document).on('click','.pixels-load-more', function(){
+
+    var page = $(this).data('page');
+    var ajaxurl= $(this).data('url');
+
+    $.ajax({
+
+      url : ajaxurl,
+      data : {
+            page : page,
+            type : 'post',
+            action : 'pixels_load_more'
+      },
+      error : function(response){
+        console.log(response);
+      },
+      success : function(response){
+
+        $('.pixels-posts-container').append(response);
+
+      }
+
+    });
+
+  });
