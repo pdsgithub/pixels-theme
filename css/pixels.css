@@ -604,8 +604,12 @@ h1 {
   -ms-transition: opacity 320ms ease;
   -o-transition: opacity 320ms ease;
   transition: opacity 320ms ease; }
-  .btn-pixels-load:hover, .btn-pixels-load:focus {
+  .btn-pixels-load:hover, .btn-pixels-load:focus, .btn-pixels-load.loading {
     opacity: 1; }
+  .btn-pixels-load.loading {
+    cursor: default; }
+  .btn-pixels-load span {
+    display: block; }
 
 .container-load-preview {
   margin-top: 80px;

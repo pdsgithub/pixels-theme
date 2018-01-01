@@ -340,9 +340,19 @@ h1 { font-size: 48px; font-weight: 200;
       @include animate(opacity, 320ms);
 
       &:hover,
-      &:focus{
+      &:focus,
+      &.loading{
         opacity: 1;
       }
+
+      &.loading{
+        cursor: default;
+      }
+
+      span{
+        display: block;
+      }
+
     }
 
   .container-load-preview{
