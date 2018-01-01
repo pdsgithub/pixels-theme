@@ -329,28 +329,44 @@ h1 { font-size: 48px; font-weight: 200;
       ------------------------------------------------
     */
 
+    .btn-pixels-load{
+      display: block;
+      width:200px;
+      color:#222;
+      font-size:30px;
+      margin: 0 auto;
+      cursor: pointer;
+      opacity: 0.5;
+      @include animate(opacity, 320ms);
+
+      &:hover,
+      &:focus{
+        opacity: 1;
+      }
+    }
+
   .container-load-preview{
     margin-top: 80px;
     margin-bottom: -40px;
   }
 
 
-  .pixels-posts-container{
-
-    padding-top: 40px;
-
-    article{
-      @include animate(all, 320ms);
-      @include transform(translateY(50px));
-      opacity: 0;
-
-      &.reveal{
-        @include transform(translateY(0));
-        opacity:1;
-      }
-
-    }
-  }
+  // .pixels-posts-container{
+  //
+  //   padding-top: 40px;
+  //
+  //   article{
+  //     @include animate(all, 320ms);
+  //     @include transform(translateY(50px));
+  //     opacity: 0;
+  //
+  //     &.reveal{
+  //       @include transform(translateY(0));
+  //       opacity:1;
+  //     }
+  //
+  //   }
+  // }
     .btn-pixels-load{
       display: block;
       width:200px;
