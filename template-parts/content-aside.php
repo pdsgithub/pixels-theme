@@ -6,6 +6,8 @@
 */
 ?>
 
+
+
 <article id="post-<?php the_ID(); ?>" <?php post_class('pixels-format-aside'); ?>>
 <div class="aside-container">
 <div class="row">

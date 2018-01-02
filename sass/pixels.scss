@@ -329,6 +329,26 @@ h1 { font-size: 48px; font-weight: 200;
       ------------------------------------------------
     */
 
+
+
+      .pixels-posts-container{
+
+      //   padding-top: 40px;
+      //
+        article{
+          @include animate(all, 320ms);
+          @include transform(translateY(100px));
+          opacity: 0;
+
+          &.reveal{
+            @include transform(translateY(0));
+            opacity:1;
+          }
+      
+        }
+      }
+
+
     .btn-pixels-load{
       display: block;
       width:200px;
@@ -361,22 +381,6 @@ h1 { font-size: 48px; font-weight: 200;
   }
 
 
-  // .pixels-posts-container{
-  //
-  //   padding-top: 40px;
-  //
-  //   article{
-  //     @include animate(all, 320ms);
-  //     @include transform(translateY(50px));
-  //     opacity: 0;
-  //
-  //     &.reveal{
-  //       @include transform(translateY(0));
-  //       opacity:1;
-  //     }
-  //
-  //   }
-  // }
     .btn-pixels-load{
       display: block;
       width:200px;

@@ -1,6 +1,8 @@
 jQuery(document).ready( function($){
 	//custom pixels scripts
 
+	revealPosts();
+
 	var carousel = '.pixels-carousel-thumb';
 
 	pixels_get_bs_thumbs(carousel);
@@ -48,12 +50,17 @@ jQuery(document).ready( function($){
 			},
 			success : function( response ){
 
-				that.data('page', newPage);
-				$('.pixels-posts-container').append( response );
+						setTimeout(function(){
 
-				setTimeout(function(){
-					that.removeClass('loading').find('.text').slideDown(320);
-					that.find('.pixels-icon').removeClass('spin');
+						that.data('page', newPage);
+						$('.pixels-posts-container').append( response );
+
+
+						that.removeClass('loading').find('.text').slideDown(320);
+						that.find('.pixels-icon').removeClass('spin');
+
+						revealPosts();
+
 				},1000);
 
 
@@ -63,5 +70,23 @@ jQuery(document).ready( function($){
 		});
 
 	});
+	/* Helper Function */
+	function revealPosts(){
+
+		var posts = $('article:not(.reveal)');
+		var i = 0;
+
+		setInterval(function(){
+
+			if(i >= posts.length) return false;
+
+			var el = posts[i];
+			$(el).addClass('reveal').find('.pixels-carousel-thumb').carousel();
+
+			i++
+
+		}, 200 );
+
+	}
 
 });
