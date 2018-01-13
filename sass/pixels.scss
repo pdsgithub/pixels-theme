@@ -333,8 +333,8 @@ h1 { font-size: 48px; font-weight: 200;
 
       .pixels-posts-container{
 
-      //   padding-top: 40px;
-      //
+         padding-top: 40px;
+
         article{
           @include animate(all, 320ms);
           @include transform(translateY(100px));
@@ -344,7 +344,7 @@ h1 { font-size: 48px; font-weight: 200;
             @include transform(translateY(0));
             opacity:1;
           }
-      
+
         }
       }
 

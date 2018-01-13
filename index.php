@@ -13,6 +13,8 @@ get_header(); ?>
 
 							if( have_posts() ):
 
+								echo '<div class="page-limit" data-page="/">';
+
 								while( have_posts() ): the_post();
 
 									// $class = 'reveal';
@@ -21,6 +23,8 @@ get_header(); ?>
 									get_template_part( 'template-parts/content', get_post_format() );
 
 								endwhile;
+
+								echo '</div>';
 
 							endif;
 
