@@ -1,10 +1,14 @@
 jQuery(document).ready( function($){
 	//custom pixels scripts
 
+	/* init functions */
 	revealPosts();
 
+	/* variable declaration */
 	var carousel = '.pixels-carousel-thumb';
+	var last_scroll = 0;
 
+	/* carousel function */
 	pixels_get_bs_thumbs(carousel);
 
 	$(carousel).on('slid.bs.carousel', function(){
@@ -70,6 +74,26 @@ jQuery(document).ready( function($){
 		});
 
 	});
+
+	/* scroll function */
+	$(window).scroll(function(){
+
+		var scroll = $(window).scrollTop();
+
+		if(Math.abs( scroll - last_scroll ) > $(window).height()*0.1){
+			last_scroll = scroll;
+
+			$('.page-limit').each(function(index){
+					if(inVisible( $(this))){
+							history.replaceState( null, null , $(this).attr("data-page"));
+							return(false);
+					}
+			});
+
+		}
+
+	});
+
 	/* Helper Function */
 	function revealPosts(){
 
@@ -87,6 +111,15 @@ jQuery(document).ready( function($){
 
 		}, 200 );
 
+	}
+
+	function inVisible(element){
+		var scroll_pos = $(window).scrollTop();
+		var window_height = $(window).height();
+		var el_top = $(element).offset().top;
+		var el_height = $(element).height();
+		var el_bottom = el_top + el_height;
+		return(( el_bottom - el_height*0.25 > scroll_pos) && (el_top < (scroll_pos+0.5*window_height)));
 	}
 
 });
